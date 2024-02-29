@@ -67,8 +67,7 @@ const logout = async (req, res) => {
 };
 
 const postCreate = async (req, res) => {
-  const { title, content, summary } = req.body;
-  const { token } = req.cookies;
+  const { title, content, summary, id } = req.body;
   if (req.file) {
     const { originalname, path } = req.file;
     const parts = originalname.split(".");
@@ -77,17 +76,14 @@ const postCreate = async (req, res) => {
     const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
 
-    const userData = jwt.verify(token, secretKey);
+    const newUser = await User.findById(id);
 
-    if (!userData) {
-      return res.status(401).json({ message: "Unauthrized !!" });
-    }
     const postDoc = await Post({
       title,
       summary,
       content,
       cover: newPath,
-      author: userData.id,
+      author: newUser._id,
     }).save();
     res.json(postDoc);
   }
