@@ -9,9 +9,11 @@ const port = process.env.PORT || 5000;
 
 const corsOptions = {
   origin: "https://mernblogappbyyogesh.netlify.app",
-  methods: "GET,POST,PUT,DELETE,PATCH",
+  // origin: "http://localhost:5173",
+  methods: "GET, POST, PUT, DELETE,PATCH,HEAD",
   credentials: true,
 };
+
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
