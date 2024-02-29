@@ -11,7 +11,6 @@ const corsOptions = {
   origin: "https://mernblogappbyyogesh.netlify.app",
   methods: "GET,POST,PUT,DELETE,PATCH",
   credentials: true,
-  optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
