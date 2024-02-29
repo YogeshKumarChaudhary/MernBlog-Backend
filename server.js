@@ -10,7 +10,8 @@ const port = process.env.PORT || 5000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 const corsOptions = {
-  origin: "*",
+  origin: "https://mernblogappbyyogesh.netlify.app",
+  methods: "GET, POST, PUT, DELETE,PATCH,HEAD",
   credentials: true,
 };
 app.use(cors(corsOptions));
