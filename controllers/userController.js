@@ -2,7 +2,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
-const fs = require("fs");
+const fs = require("fs/promises");
 const Post = require("../models/postModel");
 
 const secretKey = "yogejseojdskjakhreej8493ajknjay238439oajfjlkf";
@@ -68,25 +68,28 @@ const logout = async (req, res) => {
 
 const postCreate = async (req, res) => {
   const { title, content, summary, id } = req.body;
-  if (req.file) {
-    const { originalname, path } = req.file;
-    const parts = originalname.split(".");
-    const ext = parts[parts.length - 1];
 
-    const newPath = path + "." + ext;
-    fs.renameSync(path, newPath);
-
-    const newUser = await User.findById(id);
-
-    const postDoc = await Post({
-      title,
-      summary,
-      content,
-      cover: newPath,
-      author: newUser._id,
-    }).save();
-    res.json(postDoc);
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded. Please provide a file." });
   }
+
+  const { originalname, path } = req.file;
+  const parts = originalname.split(".");
+  const ext = parts[parts.length - 1];
+
+  const newPath = path + "." + ext;
+  await fs.renameSync(path, newPath);
+
+  const newUser = await User.findById(id);
+
+  const postDoc = await Post({
+    title,
+    summary,
+    content,
+    cover: newPath,
+    author: newUser._id,
+  }).save();
+  res.json(postDoc);
 };
 
 // getAllPost
