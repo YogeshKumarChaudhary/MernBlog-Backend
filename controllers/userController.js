@@ -2,7 +2,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
-const fs = require("fs/promises");
+const fs = require("fs");
 const Post = require("../models/postModel");
 
 const secretKey = "yogejseojdskjakhreej8493ajknjay238439oajfjlkf";

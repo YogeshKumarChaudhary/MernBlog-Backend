@@ -11,7 +11,13 @@ const {
   deletePost,
 } = require("../controllers/userController");
 const multer = require("multer");
-const uploadMiddlaware = multer({ dest: "uploads/" });
+const uploadMiddlaware = multer({
+  storage: multer.diskStorage({
+    destination: function (req, res, cb) {
+      cb(null, "uploads");
+    },
+  }),
+});
 
 const userRoutes = express.Router();
 
