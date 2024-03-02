@@ -18,9 +18,9 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.use("/api", userRoutes);
-app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.listen(port, () => {
   console.log(`App is listening on Port ${port}`);
