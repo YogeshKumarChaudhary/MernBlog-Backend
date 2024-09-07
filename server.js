@@ -17,7 +17,8 @@ const port = process.env.PORT || 5000;
 // );
 app.use(
   cors({
-    origin: true,
+    origin: "https://onlylbc.com",
+    credentials: true, // Allow credentials to be included
   })
 );
 
