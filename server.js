@@ -7,20 +7,20 @@ require("./db");
 const app = express();
 const port = process.env.PORT || 5000;
 
-// app.use(
-//   cors({
-//     origin: "https://blogapp-yogesh.netlify.app",
-//     // origin:"http://localhost:5173",
-//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-//     credentials: true,
-//   })
-// );
 app.use(
   cors({
-    origin: "https://onlylbc.com",
-    credentials: true, // Allow credentials to be included
+    origin: "https://blogapp-yogesh.netlify.app",
+    // origin:"http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
   })
 );
+// app.use(
+//   cors({
+//     origin: "https://onlylbc.com",
+//     credentials: true, // Allow credentials to be included
+//   })
+// );
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
